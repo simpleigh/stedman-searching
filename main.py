@@ -1,27 +1,23 @@
-from cProfile import Profile
-from pstats import Stats
 from queue import Queue
 
 from stedman_searching.distances_table import DistancesTable
+from stedman_searching.profiling import Profiler, Timer
 from stedman_searching.queue_item import QueueItem
 from stedman_searching.rows import perm_from_row
 from stedman_searching.stedman import multiply_end_perms_from_perm
-from stedman_searching.timer import Timer
 
 
 DISTANCE_THRESHOLD = 14
 largest_seen = 0
 
-profile = Profile()
-profile.enable()
-
+profiler = Profiler()
 queue = Queue()
-queue.put(QueueItem(perm_from_row('1234567890E'), 0))
-
 table = DistancesTable(11)
-
 timer = Timer()
 
+profiler.start()
+
+queue.put(QueueItem(perm_from_row('1234567890E'), 0))
 while not queue.empty():
     item = queue.get()
 
@@ -44,6 +40,4 @@ print(timer.split())
 print(table.get_counts())
 print(f'get_counts() took {timer.split()}')
 
-stats = Stats(profile)
-stats.sort_stats('cumulative')
-stats.print_stats(20)
+profiler.end()
