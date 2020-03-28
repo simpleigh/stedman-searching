@@ -1,3 +1,5 @@
+from cProfile import Profile
+from pstats import Stats
 from queue import Queue
 
 from stedman_searching.lengths_table import LengthsTable
@@ -9,6 +11,9 @@ from stedman_searching.timer import Timer
 
 DISTANCE_THRESHOLD = 14
 largest_seen = 0
+
+profile = Profile()
+profile.enable()
 
 queue = Queue()
 queue.put(QueueItem(perm_from_row('1234567890E'), 0))
@@ -38,3 +43,7 @@ while not queue.empty():
 print(timer.split())
 print(table.get_counts())
 print(f'get_counts() took {timer.split()}')
+
+stats = Stats(profile)
+stats.sort_stats('cumulative')
+stats.print_stats(20)
