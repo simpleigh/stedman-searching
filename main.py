@@ -5,6 +5,7 @@ from stedman_searching.lengths_table import LengthsTable
 from stedman_searching.queue_item import QueueItem
 from stedman_searching.rows import perm_from_row
 from stedman_searching.stedman import generate_next_perms
+from stedman_searching.timer import Timer
 
 
 DISTANCE_THRESHOLD = 14
@@ -15,12 +16,14 @@ queue.put(QueueItem(perm_from_row('1234567890E'), 0))
 
 table = LengthsTable(11)
 
+timer = Timer()
+
 while not queue.empty():
     item = queue.get()
 
     if item.distance > largest_seen:
         largest_seen = item.distance
-        print(largest_seen)
+        print(f'{largest_seen}, {timer.split()}')
 
     new_distance = item.distance + 2
 
@@ -33,9 +36,13 @@ while not queue.empty():
         if table.add(index, new_distance):
             queue.put(QueueItem(new_perm, new_distance))
 
+timer.split()
+
 distances = np.histogram(
     table._table,
     bins=DISTANCE_THRESHOLD // 2 + 1,
     range=(0, DISTANCE_THRESHOLD + 2)
 )
 print(distances[0])
+
+print(f'histogram() took {timer.split()}')
