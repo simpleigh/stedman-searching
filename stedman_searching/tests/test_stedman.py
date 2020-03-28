@@ -1,14 +1,14 @@
 import unittest
 
 from stedman_searching.rows import perm_from_row, row_from_perm
-from stedman_searching.stedman import generate_next_perms
+from stedman_searching.stedman import multiply_end_perms_from_perm
 
 
 class StedmanTestCase(unittest.TestCase):
 
     def test_rows_from_rounds(self):
         rounds = perm_from_row('1234567890E')
-        perms = generate_next_perms(rounds)
+        perms = multiply_end_perms_from_perm(rounds)
         rows = [row_from_perm(perm) for perm in perms]
         self.assertEqual(rows, [
             '2468103E597',
@@ -22,7 +22,7 @@ class StedmanTestCase(unittest.TestCase):
 
     def test_rows_from_other_row(self):
         other = perm_from_row('527391E4068')
-        perms = generate_next_perms(other)
+        perms = multiply_end_perms_from_perm(other)
         rows = [row_from_perm(perm) for perm in perms]
         self.assertEqual(rows, [
             '2314567890E',

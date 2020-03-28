@@ -2,10 +2,10 @@ from cProfile import Profile
 from pstats import Stats
 from queue import Queue
 
-from stedman_searching.lengths_table import LengthsTable
+from stedman_searching.distances_table import DistancesTable
 from stedman_searching.queue_item import QueueItem
 from stedman_searching.rows import perm_from_row
-from stedman_searching.stedman import generate_next_perms
+from stedman_searching.stedman import multiply_end_perms_from_perm
 from stedman_searching.timer import Timer
 
 
@@ -18,7 +18,7 @@ profile.enable()
 queue = Queue()
 queue.put(QueueItem(perm_from_row('1234567890E'), 0))
 
-table = LengthsTable(11)
+table = DistancesTable(11)
 
 timer = Timer()
 
@@ -34,7 +34,7 @@ while not queue.empty():
     if new_distance > DISTANCE_THRESHOLD:
         continue
 
-    new_perms = generate_next_perms(item.perm)
+    new_perms = multiply_end_perms_from_perm(item.perm)
     for new_perm in new_perms:
         index = new_perm.rank_nonlex()
         if table.add(index, new_distance):
