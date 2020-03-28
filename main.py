@@ -3,21 +3,23 @@ from queue import Queue
 from stedman_searching.distances_table import DistancesTable
 from stedman_searching.profiling import Profiler, Timer
 from stedman_searching.queue_item import QueueItem
-from stedman_searching.rows import perm_from_row
+from stedman_searching.rows import perm_for_rounds, perm_from_row
 from stedman_searching.stedman import multiply_end_perms_from_perm
 
 
 DISTANCE_THRESHOLD = 14
+STAGE = 11
+
 largest_seen = 0
 
 profiler = Profiler()
 queue = Queue()
-table = DistancesTable(11)
+table = DistancesTable(STAGE)
 timer = Timer()
 
 profiler.start()
 
-queue.put(QueueItem(perm_from_row('1234567890E'), 0))
+queue.put(QueueItem(perm_for_rounds(STAGE), 0))
 while not queue.empty():
     item = queue.get()
 

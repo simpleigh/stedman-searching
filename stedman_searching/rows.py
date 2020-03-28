@@ -5,6 +5,11 @@ Functions to convert between different ways of expressing rows
 from sympy.combinatorics import Permutation
 
 
+def perm_for_rounds(stage):
+    """ Rounds on a particular number of bells """
+    return Permutation(stage - 1)
+
+
 """
 Mapping of bell symbols to bell numbers
 

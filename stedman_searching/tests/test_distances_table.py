@@ -11,10 +11,10 @@ class DistancesTableTestCase(unittest.TestCase):
         self.assertIs(len(table), 1)
 
     def test_create_longer_distances(self):
-        for bells in range(2, 8):
-            with self.subTest(bells=bells):
-                table = DistancesTable(bells)
-                self.assertEqual(len(table), factorial(bells))
+        for stage in range(2, 8):
+            with self.subTest(stage=stage):
+                table = DistancesTable(stage)
+                self.assertEqual(len(table), factorial(stage))
 
     def test_starts_empty(self):
         table = DistancesTable(4)

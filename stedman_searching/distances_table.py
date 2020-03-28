@@ -10,8 +10,8 @@ class DistancesTable:
     Wraps a `numpy` array.
     """
 
-    def __init__(self, bells):
-        self._table = np.zeros(factorial(bells), np.int8)
+    def __init__(self, stage):
+        self._table = np.zeros(factorial(stage), np.int8)
 
     def __contains__(self, index):
         return self._table[index] > 0
