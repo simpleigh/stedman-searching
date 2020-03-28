@@ -1,4 +1,3 @@
-import numpy as np
 from queue import Queue
 
 from stedman_searching.lengths_table import LengthsTable
@@ -36,13 +35,6 @@ while not queue.empty():
         if table.add(index, new_distance):
             queue.put(QueueItem(new_perm, new_distance))
 
-timer.split()
-
-distances = np.histogram(
-    table._table,
-    bins=DISTANCE_THRESHOLD // 2 + 1,
-    range=(0, DISTANCE_THRESHOLD + 2)
-)
-print(distances[0])
-
-print(f'histogram() took {timer.split()}')
+print(timer.split())
+print(table.get_counts())
+print(f'get_counts() took {timer.split()}')

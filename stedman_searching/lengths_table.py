@@ -25,3 +25,10 @@ class LengthsTable:
             return True
 
         return False
+
+    def get_counts(self):
+        return [
+            distance
+            for distance in np.bincount(self._table)
+            if distance > 0
+        ]
