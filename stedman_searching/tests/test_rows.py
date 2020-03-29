@@ -6,6 +6,7 @@ from stedman_searching.rows import (
     perm_for_rounds,
     perm_from_row,
     row_from_perm,
+    SetRow,
 )
 
 
@@ -54,3 +55,56 @@ class RowsTestCase(unittest.TestCase):
             row_from_perm(reverse_rounds),
             'E0987654321',
         )
+
+
+class SetRowTestCase(unittest.TestCase):
+
+    def test_equal(self):
+        row1 = SetRow('123')
+        row2 = SetRow('123')
+        self.assertEqual(row1, row2)
+
+    def test_not_equal(self):
+        row1 = SetRow('123')
+        row2 = SetRow('213')
+        self.assertNotEqual(row1, row2)
+
+    def test_equal_despite_metadata(self):
+        row1 = SetRow('123', key='value')
+        row2 = SetRow('123', other=42)
+        self.assertEqual(row1, row2)
+
+    def test_exposes_metadata_as_attributes(self):
+        row = SetRow('123', key='value', other=42)
+        self.assertEqual(row.key, 'value')
+        self.assertIs(row.other, 42)
+
+    def test_raises_if_metadata_not_available(self):
+        row = SetRow('123')
+        with self.assertRaises(AttributeError):
+            row.unknown
+
+    def test_hashes_to_row(self):
+        row = SetRow('123')
+        self.assertEqual(hash(row), hash('123'))
+
+    def test_hash_ignores_metadata(self):
+        row = SetRow('123', key='value')
+        self.assertEqual(hash(row), hash('123'))
+
+    def test_set_ignores_metadata(self):
+        row1 = SetRow('123', key='value')
+        row2 = SetRow('123', other=42)
+        self.assertIs(1, len(set([row1, row2])))
+
+    def test_repr_no_metadata(self):
+        row = SetRow('123')
+        self.assertEqual(repr(row), "SetRow('123')")
+
+    def test_repr_with_metadata(self):
+        row = SetRow('123', key='value', other=42)
+        self.assertEqual(repr(row), "SetRow('123', key='value', other=42)")
+
+    def test_str_is_row(self):
+        row = SetRow('123', key='value', other=42)
+        self.assertEqual(str(row), '123')
