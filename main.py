@@ -1,6 +1,6 @@
 from queue import Queue
 
-from stedman_searching.distances_table import DistancesTable
+from stedman_searching.distances_array import DistancesArray
 from stedman_searching.profiling import Profiler, Timer
 from stedman_searching.queue_item import QueueItem
 from stedman_searching.rows import perm_for_rounds, perm_from_row
@@ -12,9 +12,9 @@ STAGE = 11
 
 largest_seen = 0
 
+array = DistancesArray(STAGE)
 profiler = Profiler()
 queue = Queue()
-table = DistancesTable(STAGE)
 timer = Timer()
 
 profiler.start()
@@ -35,11 +35,11 @@ while not queue.empty():
     new_perms = multiply_end_perms_from_perm(item.perm)
     for new_perm in new_perms:
         index = new_perm.rank_nonlex()
-        if table.add(index, new_distance):
+        if array.add(index, new_distance):
             queue.put(QueueItem(new_perm, new_distance))
 
 print(timer.split())
-print(table.get_counts())
+print(array.get_counts())
 print(f'get_counts() took {timer.split()}')
 
 profiler.end()
