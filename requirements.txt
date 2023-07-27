@@ -14,7 +14,7 @@ arrow==1.2.3
     # via isoduration
 asttokens==2.2.1
     # via stack-data
-async-lru==2.0.3
+async-lru==2.0.4
     # via jupyterlab
 attrs==23.1.0
     # via
@@ -43,7 +43,9 @@ decorator==5.1.1
 defusedxml==0.7.1
     # via nbconvert
 exceptiongroup==1.1.2
-    # via anyio
+    # via
+    #   anyio
+    #   pytest
 executing==1.2.0
     # via stack-data
 fastjsonschema==2.18.0
@@ -55,6 +57,8 @@ idna==3.4
     #   anyio
     #   jsonschema
     #   requests
+iniconfig==2.0.0
+    # via pytest
 ipykernel==6.25.0
     # via jupyterlab
 ipython==8.14.0
@@ -155,6 +159,7 @@ packaging==23.1
     #   jupyterlab
     #   jupyterlab-server
     #   nbconvert
+    #   pytest
 pandocfilters==1.5.0
     # via nbconvert
 parso==0.8.3
@@ -165,6 +170,8 @@ pickleshare==0.7.5
     # via ipython
 platformdirs==3.9.1
     # via jupyter-core
+pluggy==1.2.0
+    # via pytest
 prometheus-client==0.17.1
     # via jupyter-server
 prompt-toolkit==3.0.39
@@ -183,6 +190,8 @@ pygments==2.15.1
     # via
     #   ipython
     #   nbconvert
+pytest==7.4.0
+    # via -r requirements.in
 python-dateutil==2.8.2
     # via
     #   arrow
@@ -237,7 +246,9 @@ terminado==0.17.1
 tinycss2==1.2.1
     # via nbconvert
 tomli==2.0.1
-    # via jupyterlab
+    # via
+    #   jupyterlab
+    #   pytest
 tornado==6.3.2
     # via
     #   ipykernel

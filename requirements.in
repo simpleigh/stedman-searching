@@ -1,3 +1,4 @@
 notebook  # https://jupyter.readthedocs.io/en/latest/index.html
 numpy  # https://numpy.org/doc/stable/
+pytest  # https://docs.pytest.org/en/7.4.x/
 sympy  # https://docs.sympy.org/latest/index.html

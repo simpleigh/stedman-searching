@@ -1,27 +1,24 @@
-import unittest
 from unittest.mock import patch
 
 from stedman_searching.profiling import Profiler, Timer
 
 
-class TimerTestCase(unittest.TestCase):
-
+class TestTimer:
     def test_can_be_created(self):
         Timer()
         # succeeds if no errors
 
     def test_returns_nonzero_split(self):
         timer = Timer()
-        self.assertGreater(timer.split(), 0)
+        assert timer.split() > 0
 
     def test_splits_not_always_increasing(self):
         timer = Timer()
         splits = [timer.split() for _ in range(10)]
-        self.assertNotEqual(splits, list(sorted(splits)))
+        assert splits != list(sorted(splits))
 
 
-class ProfilerTestCase(unittest.TestCase):
-
+class TestProfiler:
     def test_can_be_created(self):
         Profiler()
         # succeeds if no errors
