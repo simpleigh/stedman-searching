@@ -1,3 +1,3 @@
-jupyter  # https://jupyter.readthedocs.io/en/latest/index.html
-numpy  # https://numpy.org/doc/1.18/
+notebook  # https://jupyter.readthedocs.io/en/latest/index.html
+numpy  # https://numpy.org/doc/stable/
 sympy  # https://docs.sympy.org/latest/index.html
